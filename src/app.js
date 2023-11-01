@@ -34,6 +34,26 @@ app.get('', (req, res) => {
             teksBantuan:'Ini adalah teks bantuan'
         })
     })
+
+    app.get('/tentang', (req, res) => {
+        res.render('tentang', {
+            judul: 'Tentang Penulis',
+            nama: 'Alkindi Sy',
+            pekerjaan: 'Software Engineer',
+            pendidikan: 'S1 Informatika',
+            prestasi: [
+                { tahun: '2021', Lomba: 'Juara 2 Web Developer'},
+                { tahun: '2013', Lomba: 'Juara 1 MTQ Tingkat Kabupaten/Kota'}
+            ],
+            keterampilan: ['JavaScript', 'Node.js', 'Express.js', 'PHP', 'HTML', 'CSS'],
+            Hobi: ['Olahraga', 'Bermain Game', 'Memasak'],
+            kontak: {
+                email: 'alkindi.syamsi2612@gmail.com',
+                WA: '+6293187180209',
+                IG: 'alkinnndisy'
+            }
+        });
+    });
     
     app.get('/infocuaca', (req, res) => {
         if (!req.query.address) {

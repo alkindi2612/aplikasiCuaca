@@ -4,15 +4,44 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/style.css">
-    <title>Tentang</title>
+    <title>{{ judul }}</title>
 </head>
 <body>
+    {{>header}}
+    <div class="tentang-container">
+        <div class="tentang-foto">
+            <img src="/img/kinn.png" alt="Foto gweh">
+        </div>
+    <div class="tentang-keterangan">
+        <h5> Tentang Saya: </h5>
+    <p>Nama: {{ nama }}</p>
+    <p>Pekerjaan: {{ pekerjaan }}</p>
+    <p>Pendidikan: {{ pendidikan }}</p>
 
-    <div class="main-content">
-        {{>header}}
-    <img class="portrait" src="/img/kinn.png">
+    <h5>Prestasi:</h5>
+    <ul>
+        {{#each prestasi}}
+            <li>{{ tahun }} - {{ Lomba }}</li>
+        {{/each}}
+    </ul>
+
+    <h5>Keterampilan:</h5>
+    <ul>
+        {{#each keterampilan}}
+            <li>{{ this }}</li>
+        {{/each}}
+    </ul>
+
+    <p>Hobi: {{Hobi}}</p>
+
+    <h5>Kontak:</h5>
+    <p>Email: {{ kontak.email }}</p>
+    <p>WA: {{ kontak.WA }}</p>
+    <p>IG: {{ kontak.IG }}</p>
+
     </div>
-    {{>footer}}
+</div>
 
+    {{>footer}}
 </body>
 </html>
