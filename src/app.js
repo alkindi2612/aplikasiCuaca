@@ -3,6 +3,7 @@ const path = require('path')
 const hbs = require('hbs')
 const geocode = require('./utils/geocode')
 const forecast = require('./utils/prediksiCuaca')
+const axios = require('axios')
 
 const app = express()
 const port = process.env.PORT || 4000
@@ -52,8 +53,35 @@ app.get('', (req, res) => {
                 WA: '+6293187180209',
                 IG: 'alkinnndisy'
             }
-        });
-    });
+        })
+    })
+
+    app.get('/berita', async (req, res) => {
+        try {
+            const urlApiMediaStack = 'http://api.mediastack.com/v1/news';
+            const apiKey = '15258492bf3730f6dbafb9403899fa63';
+    
+            const params = {
+                access_key: apiKey,
+                category: 'sports', 
+            };
+    
+            const response = await axios.get(urlApiMediaStack, { params });
+            const dataBerita = response.data;
+    
+            res.render('berita', {
+                nama: 'Alkindi Sy',
+                judul: 'Halaman Berita',
+                berita: dataBerita.data,
+            });
+        } catch (error) {
+            console.error(error);
+            res.render('error', {
+                judul: 'Terjadi Kesalahan',
+                pesanKesalahan: 'Terjadi kesalahan saat mengambil berita.',
+            })
+        }
+    })
     
     app.get('/infocuaca', (req, res) => {
         if (!req.query.address) {
